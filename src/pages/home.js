@@ -43,7 +43,7 @@ export function initHomeAnimations() {
     initLineAnimations();
     playVideo();
     startVideo();
-    // animateWorkImages();
+    animateWorkImages();
     applyParallaxEffect();
     serviceHoverAnimation();
     visionSectionAnimation();

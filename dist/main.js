@@ -1,7 +1,7 @@
 /**
  * Brandemic Dubai - Custom Animations
  * Version: 1.0.0
- * Built: 2025-12-02T10:57:50.553Z
+ * Built: 2025-12-02T11:41:13.184Z
  * 
  * This file is auto-generated from modular source code.
  * Do not edit directly - edit the source files in /src instead.
@@ -914,6 +914,60 @@
     }
 
     /**
+     * Animate work images with FLIP
+     */
+    function animateWorkImages() {
+        const wrapper = document.querySelector(".work_images-wrapper");
+        if (!wrapper) return;
+
+        const images = document.querySelectorAll(".work_image");
+        const firstImage = images[0];
+        const secondImage = images[1];
+        const title = document.querySelector(".our-work_title");
+        const titleWrapper = document.querySelector(".our-work_title-wrapper");
+
+        images.forEach((img, index) => {
+            img.style.zIndex = images.length - index;
+        });
+
+        gsap.set(firstImage, { rotation: 6 });
+        gsap.set(secondImage, { rotation: 3 });
+
+        ScrollTrigger.create({
+            trigger: ".our-work_block",
+            start: "center 75%",
+            once: true,
+            onEnter: () => {
+                const worksTl = gsap.timeline();
+
+                worksTl.to(title, {
+                    y: "-100%",
+                    duration: 1,
+                    ease: "power1.out"
+                })
+                    .to([firstImage, secondImage], {
+                        rotation: 0,
+                        duration: 1,
+                        ease: "power1.out"
+                    }, "<")
+                    .set(title, { autoAlpha: 0 })
+                    .set(titleWrapper, { autoAlpha: 0 })
+                    .add(() => {
+                        const state = Flip.getState(images);
+                        wrapper.classList.add("flex-layout");
+
+                        Flip.from(state, {
+                            duration: 1,
+                            ease: "power1.out",
+                            stagger: 0.05,
+                            onComplete: featuredWorkLoop
+                        });
+                    });
+            }
+        });
+    }
+
+    /**
      * Service Hover Animation - Expandable service elements
      */
 
@@ -1351,7 +1405,7 @@
         initLineAnimations();
         playVideo();
         startVideo();
-        // animateWorkImages();
+        animateWorkImages();
         applyParallaxEffect();
         serviceHoverAnimation();
         visionSectionAnimation();
