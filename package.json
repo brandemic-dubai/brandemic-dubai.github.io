@@ -1,0 +1,28 @@
+{
+  "name": "brandemic-dubai-animations",
+  "version": "1.0.0",
+  "description": "Custom GSAP and Barba.js animations for Brandemic Dubai website",
+  "main": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "build": "rollup -c",
+    "build:watch": "rollup -c -w",
+    "dev": "rollup -c -w",
+    "release:patch": "npm version patch && npm run build && git add -A && git commit -m \"Build v%npm_package_version%\" && git push && git push --tags",
+    "release:minor": "npm version minor && npm run build && git add -A && git commit -m \"Build v%npm_package_version%\" && git push && git push --tags",
+    "release:major": "npm version major && npm run build && git add -A && git commit -m \"Build v%npm_package_version%\" && git push && git push --tags"
+  },
+  "keywords": [
+    "gsap",
+    "barba",
+    "webflow",
+    "animations"
+  ],
+  "author": "Brandemic Dubai",
+  "license": "UNLICENSED",
+  "devDependencies": {
+    "@rollup/plugin-node-resolve": "^15.2.3",
+    "@rollup/plugin-terser": "^0.4.4",
+    "rollup": "^4.9.1"
+  }
+}
